@@ -224,3 +224,132 @@ void printList(){
         printList();
 
 }
+void cariNode(){
+    penghuni *cari = head; int search = 0; int choice; int kos;
+    char nama[50];
+    system("cls");
+    printf("Nama yang ingin dicari: ");
+    scanf(" %[^\n]s", &nama);
+    while (cari != NULL)
+    {
+        if (strcmp(cari->nama, nama) == 0){
+            printf("\n+------------------------------------------+\n");
+            printf("Nama               : %s \n", cari->nama);
+            printf("Nomor Telepon      : %s \n", cari->telepon);
+            printf("Asal               : %s \n", cari->asal);
+            printf("NIK                : %s \n", cari->nik);
+            printf("Lama Tinggal       : %3.0f tahun\n", cari->lama);
+            printf("Kamar yang dipilih : ");
+            if (cari->kos == 1)
+                printf("Tipe A\n");
+            if (cari->kos == 2)
+                printf("Tipe B\n");
+            if (cari->kos == 3)
+                printf("Tipe C\n");
+            if (cari->kos == 4)
+                printf("Tipe D\n");
+            if (cari->kos == 5)
+                printf("Tipe E\n");
+            printf("\n--HARGA PERBULAN : Rp %3.3f--\n", cari->lama * 100);
+            printf("+--------------------------------------------+\n");
+
+D, [4/13/2023 3:44 AM]
+search = 1;
+            break;
+        }
+        cari = cari->pointer;
+    }
+    if (search == 0)
+    {
+        printf("Nama tidak ditemukan.\n");
+        system("pause");
+        printList();
+    }
+    else if (search == 1)
+    {
+        printf("1. Print Data\n");
+        printf("2. Ubah Data\n");
+        printf("3. Keluar\n");
+        printf("Input: "); scanf("%d", &choice);
+        if (choice == 1)
+        {
+            FILE *cetak;
+            cetak = fopen("PenghuniKos.txt", "w");
+            fprintf(cetak, "+------------   PEPAYA KOS   ------------+\n");
+            fprintf(cetak, "Nama               : %s\n", cari->nama);
+            fprintf(cetak, "Nomor telepon      : %s\n", cari->telepon);
+            fprintf(cetak, "Asal               : %s\n", cari->asal);
+            fprintf(cetak, "NIK                : %s\n", cari->nik);
+            fprintf(cetak, "Lama Tinggal       : %3.0f tahun\n", cari->lama);
+            fprintf(cetak, "Kamar yang dipilih : ");
+            if (cari->kos == 1)
+                fprintf(cetak, "Tipe A\n\n");
+            else if (cari->kos == 2)
+                fprintf(cetak, "Tipe B\n\n");
+            else if (cari->kos == 3)
+                fprintf(cetak, "Tipe C\n\n");
+            else if (cari->kos == 4)
+                fprintf(cetak, "Tipe D\n\n");
+            else if (cari->kos == 5)
+                fprintf(cetak, "Tipe E\n\n");
+            fprintf(cetak, "---JUMLAH YANG HARUS DIBAYAR: Rp %3.3f---\n", cari->lama * 100);
+            fprintf(cetak, "+---------------------------------------+\n");
+            fclose(cetak);
+            printf("Data berhasil dicetak. \n");
+            system("pause");
+            Menu();
+        }
+        else if (choice == 2)
+        {
+            printf("\nData apa yang ingin dihapus?\n");
+            printf("1. Nama\n");
+            printf("2. Nomor telepon\n");
+            printf("3. Asal\n");
+            printf("4. NIK\n");
+            printf("5. Lama Tinggal\n");
+            printf("6. Kamar yang dipilih\n");
+            printf("Input: "); scanf("%d", &choice);
+            if (choice == 1)
+            {
+                printf("Nama: "); scanf(" %[^\n]s", cari->nama);
+                printf("Data berhasil diubah. \n"); system("pause"); printList();
+            }
+            else if (choice == 2)
+            {
+                printf("Nomor telepon: "); scanf(" %[^\n]s", cari->telepon);
+                printf("Data berhasil diubah. \n"); system("pause"); printList();
+            }
+            else if (choice == 3)
+            {
+                printf("Asal: "); scanf(" %[^\n]s", cari->asal);
+                printf("Data berhasil diubah. \n"); system("pause"); printList();
+            }
+            else if (choice == 4)
+            {
+                printf("Nomor NIK: "); scanf(" %[^\n]s", cari->nik);
+
+printf("Data berhasil diubah. \n"); system("pause"); printList();
+            }
+            else if (choice == 5)
+            {
+                printf("Lama tinggal: "); scanf("%f", &cari->lama);
+                printf("Data berhasil diubah. \n"); system("pause"); printList();
+            }
+            else if (choice == 6)
+            {
+                kos = pilihKamar();
+                cari->kos = kos;
+                printf("Data berhasil diubah. \n"); system("pause"); printList();
+            }
+            else
+                cariNode();
+        }
+        else if (choice == 3)
+        {
+            Menu();
+        }
+        else{
+            printList();
+        }
+    }
+}
