@@ -294,7 +294,6 @@ void cariNode(){
             printf("\n--HARGA PERBULAN : Rp %3.3f--\n", cari->lama * 100);
             printf("+--------------------------------------------+\n");
 
-D, [4/13/2023 3:44 AM]
 search = 1;
             break;
         }
