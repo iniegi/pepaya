@@ -225,20 +225,44 @@ void printList(){
 
 }
 
-void addNodeBelakang(char nama[50], char asal[50], char nik[16], float lama, char telepon[15], int kos)
-{
-penghuni *penghuniBaru = Baru(nama, asal, nik, lama, telepon, kos);
-penghuni *tail = head;
-if (head == NULL){
-    head = penghuniBaru;
+void inputData(){
+    char tempNama[50], tempAsal[50], tempNik[16], tempTelepon[15]; float tempLama; int tempKos;
+    system("cls");
+    printf("Masukkan nama            : "); scanf(" %[^\n]s", &tempNama);
+    printf("Masukkan nomor telepon   : "); scanf(" %[^\n]s", &tempTelepon);
+    printf("Asal                     : "); scanf(" %[^\n]s", &tempAsal);
+    printf("Masukkan nik             : "); scanf(" %[^\n]s", &tempNik);
+    printf("Lama Tinggal             : "); scanf("%f", &tempLama);
+    tempKos = pilihKamar();
+    temp = Baru(tempNama, tempAsal, tempNik, tempLama, tempTelepon, tempKos);
+    temp->pointer = head;
+    head = temp;
+    system("pause");
+    Menu();
+}
+
+void deleteNode(char nama[50]){
+penghuni *cari = head, *prev = NULL;
+if (cari != NULL && strcmp(cari->nama, nama) == 0){
+    head = cari->pointer;
+    free(cari);
+    printf("Data berhasil dihapus!\n");
     return;
 }
 
-while (tail->pointer != NULL)
-    tail = tail->pointer;
+while (cari != NULL && strcmp(cari->nama, nama) != 0){
+    prev = cari;
+    cari = cari->pointer;
+}
 
-tail->pointer = penghuniBaru;
-printf("Data berhasil ditambahkan!\n");
+if (cari == NULL){
+    printf("Data tidak ditemukan.\n");
+    return;
+}
+
+prev->pointer = cari->pointer;
+free(cari);
+printf("Data berhasil dihapus!\n");
 }
 
 void cariNode(){
