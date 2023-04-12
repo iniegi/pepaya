@@ -394,3 +394,56 @@ printf("Data berhasil diubah. \n"); system("pause"); printList();
         }
     }
 }
+
+void sorting(){
+int swapped, i;
+penghuni *ptr1;
+penghuni *lptr = NULL;
+if (head == NULL)
+    return;
+
+do{
+    swapped = 0;
+    ptr1 = head;
+
+    while (ptr1->pointer != lptr){
+        if (strcmp(ptr1->nama, ptr1->pointer->nama) > 0){
+            swap(ptr1, ptr1->pointer);
+            swapped = 1;
+        }
+        ptr1 = ptr1->pointer;
+    }
+    lptr = ptr1;
+}
+while (swapped);
+printf("Data berhasil diurutkan!\n");
+}
+
+void swap(penghuni *a, penghuni *b){
+char temp[50], temp2[100], temp3[16], temp4[15];
+float temp5;
+int temp6;
+strcpy(temp, a->nama);
+strcpy(a->nama, b->nama);
+strcpy(b->nama, temp);
+
+strcpy(temp2, a->asal);
+strcpy(a->asal, b->asal);
+strcpy(b->asal, temp2);
+
+strcpy(temp3, a->nik);
+strcpy(a->nik, b->nik);
+strcpy(b->nik, temp3);
+
+strcpy(temp4, a->telepon);
+strcpy(a->telepon, b->telepon);
+strcpy(b->telepon, temp4);
+
+temp5 = a->lama;
+a->lama = b->lama;
+b->lama = temp5;
+
+temp6 = a->kos;
+a->kos = b->kos;
+b->kos = temp6;
+}
