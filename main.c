@@ -108,3 +108,119 @@ void loading(){
     sleep(1);
     Menu();
 }
+
+void Menu(){
+    int input;
+    system("cls");
+    printf("+---------------------------+\n");
+    printf("SELAMAT DATANG DI KOS PEPAYA!\n");
+    printf("+---------------------------+\n");
+    printf("1. Pepaya Kos\n");
+    printf("2. Data Penghuni\n");
+    printf("3. Keluar\n\n");
+    printf("Pilihan anda: "); scanf("%d", &input);
+    printf("+--------------------------+\n");
+    if (input == 1)
+    {
+        inputData();
+    }
+    else if (input == 2)
+    {
+        printList();
+    }
+    else if (input == 3)
+    {
+        exit(0);
+    }
+    else{
+        Menu();
+    }
+
+}
+
+int pilihKamar(){
+    int input;
+    printf("Pilihan Kamar:\n");
+    if (batas[0])
+        printf("1. Tipe A, kamar mandi dalam, lantai bawah\n");
+    if (batas[1])
+        printf("2. Tipe B, kamar mandi luar, lantai bawah\n");
+    if (batas[2])
+        printf("3. Tipe C, kamar mandi dalam, lantai atas\n");
+    if (batas[3])
+        printf("4. Tipe D, kamar mandi luar, lantai atas\n");
+    if (batas[4])
+        printf("5. Tipe E, kamar mandi dalam dan plus AC\n");
+    printf("Pilihlah kamar anda: "); scanf("%d", &input);
+    if (input == 1 && batas[0] > 0)
+    {
+        batas[0]--;
+        return input;
+    }
+    else if (input == 2 && batas[1] > 0)
+    {
+        batas[1]--;
+        return input;
+    }
+    else if (input == 3 && batas[2] > 0)
+    {
+        batas[2]--;
+        return input;
+    }
+    else if (input == 4 && batas[3] > 0)
+    {
+        batas[3]--;
+        return input;
+    }
+    else if (input == 5 && batas[4] > 0)
+    {
+        batas[4]--;
+        return input;
+    }
+    else{
+        printf("\nKamar sudah ditempati\n");
+        pilihKamar();
+    }
+}
+void printList(){
+    int input = 0;
+    system("cls");
+    penghuni *read = head;
+    while (read != NULL)
+    {
+        printf("\n+---------------------------------------+\n");
+        printf("Nama               : %s \n", read->nama);
+        printf("Nomor Telpon       : %s \n", read->telepon);
+        printf("Asal               : %s \n", read->asal);
+        printf("NIK                : %s \n", read->nik);
+        printf("Lama Tinggal       : %3.0f Tahun\n", read->lama);
+        printf("Kamar yang dipilih : ");
+        if (read->kos == 1)
+            printf("Tipe A, kamar mandi dalam, lantai bawah\n");
+        if (read->kos == 2)
+            printf("Tipe B, kamar mandi luar, lantai bawah\n");
+        if (read->kos == 3)
+            printf("Tipe C, kamar mandi dalam, lantai atas\n");
+        if (read->kos == 4)
+            printf("Tipe D, kamar mandi luar, lantai atas\n");
+        if (read->kos == 5)
+            printf("Tipe E, kamar mandi dalam dan plus AC\n");
+        printf("\n--HARGA PERBULAN : Rp %3.3f\n", read->lama * 100);
+        printf("+----------------------------------------+\n");
+        read = read->pointer;
+    }
+    printf("1. Cari\n");
+    printf("2. Urutkan\n");
+    printf("3. Kembali\n");
+    scanf("%d", &input);
+    if (input == 1){
+        cariNode();
+    }
+    else if (input == 2)
+        sorting();
+    else if (input == 3)
+        Menu();
+    else
+        printList();
+
+}
