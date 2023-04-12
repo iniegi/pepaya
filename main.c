@@ -224,6 +224,23 @@ void printList(){
         printList();
 
 }
+
+void addNodeBelakang(char nama[50], char asal[50], char nik[16], float lama, char telepon[15], int kos)
+{
+penghuni *penghuniBaru = Baru(nama, asal, nik, lama, telepon, kos);
+penghuni *tail = head;
+if (head == NULL){
+    head = penghuniBaru;
+    return;
+}
+
+while (tail->pointer != NULL)
+    tail = tail->pointer;
+
+tail->pointer = penghuniBaru;
+printf("Data berhasil ditambahkan!\n");
+}
+
 void cariNode(){
     penghuni *cari = head; int search = 0; int choice; int kos;
     char nama[50];
