@@ -53,23 +53,6 @@ void login(){
         system("pause");
         login();
     }
-    int index = 0;
-    char ch;
-    while ((ch = getch()) != '\r') {
-        if (ch == '\b') {
-            if (index > 0) {
-                printf("\b \b");
-                index--;
-            }
-        } else {
-            if (index < MAX_PASSWORD_LENGTH - 1) {
-                printf("*");
-                pass[index] = ch;
-                index++;
-            }
-        }
-    }
-    password[index] = '\0';
 }
 
 void loading(){
